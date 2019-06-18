@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+
+
+	//数组去重  测试	
+
+
+	
+		//  1.  sort（ function(参数a，参数b){return(a-b)}   数组排序  从小到大
+		//      push
+		
+		var arr1 = [7,4,2,8,1,6,5,7,5,10,22,5]; //先进行排序
+		var _arr = arr1.sort( function(a,b){ return(a-b) } );
+		//排序后 _arr=[1,2,4,5,5,5,6,7,7,8,10,22]
+		function fn( _arr ){
+			var brr=[];//去重后的数组
+			for( var i=0; i<_arr.length; i++ ){
+				if( _arr[i] != _arr[i+1] ){ //如果前一个不等于后一个,就存入brr
+					brr.push(_arr[i]);
+				}
+			}
+			return brr; //返回去重后的结果
+		}
+		document.write(fn( _arr)); 
+		//最终结果输出[1,2,4,5,6,7,8,10,22]
+	 
+		
+		
+		
+		
+		
+		
+	
+		 //  2.  封装一个函数  返回布尔类型
+	 	 
+		 //判断一个数组中是否存在这个数num
+		function has(arr,num){ 
+			for( var i=0; i<arr.length; i++ ){
+				if( arr[i]==num ){
+				return true;//数组中存在num这个数
+				}
+			}
+			return false;//数组中不存在num这个数
+		}
+		
+		function noRepeat(arr){
+			var brr=[];//去重后的数组
+			for( var i=0; i<arr.length; i++ ){
+				if( !has( brr,arr[i] ) ){ //判断arr[i]在brr中是否存在
+					brr.push( arr[i] );//如果不存在就存入brr中
+				}
+			}
+			return brr; //返回去重后的数组
+		}
+		var arr = [7,4,2,8,1,6,5,5,7,5,10,22,5];
+		document.write( noRepeat(arr) );
+		//最终结果输出 [7,4,2,8,1,6,5,10,22]
+	
+	 
+	
+	
+	
+	
+	
+	
+	
+		//  3.  依次用数组中的某个数和后面的数进行比较,如果相等的,就删除后面的数.
+		function noRepeat(arr){
+			for( var i=0; i<arr.length;i++ ){
+				for( var j=i+1; j<arr.length;j++ ){
+					if( arr[i] == arr[j] ){
+						arr.splice(j,1);
+						j--;
+					}
+				}
+			}
+			return arr;//返回去重后的数组
+		}
+		document.write(noRepeat([12,5,7,2,9,12,20,2,2,12,5]));
+	 
+
+	
+	
+	
+	
+	
+	
+		//indexOf 
+		//  4.  判断某个数据在数组中是否存在,
+		//如果存在就返回这个数在数组中的下标,
+		//如果不存在就返回-1
+		var arr=[7,4,2,8,1,6,5,5,7,5,10,22,5];
+		function noRepeat(arr){
+			var brr = [];//去重后的数组
+			for( var i=0; i<arr.length; i++ ){
+				if( brr.indexOf( arr[i]) == -1 ){  //如果不存在就存入brr
+					brr.push( arr[i] );
+				}
+			}
+			return brr;  //返回去重后的结果
+		}
+		document.write(noRepeat(arr));
+		//最终结果输出 [7,4,2,8,1,6,5,10,22]
+	 
+	
+	
+	
+	
+		
+		//  5.  使用reduce实现数组去重
+		function noRepeat(){
+			var arr = [23,12,23,12,34,56,5,5,6,6];
+			var brr = arr.reduce(function(prev,next){
+				if( prev.indexOf(next) == -1 ){  //如果不存在就存入brr
+					prev.push( next );
+				}
+				document.write( prev+"<br/>" );
+				return prev;
+			},[]);
+			alert(brr);
+		}
+		noRepeat();
+		//输出结果： [23,12,34,56,5,6]
+			 
+	</script>
+</html>
